@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.accountservera.mapper.AccountMapper">
+
+    <update id="updateAccountDollar">
+        UPDATE account_dollar
+        SET dollar = dollar + #{dollar}
+        WHERE user_id = #{userId}
+        AND dollar > -#{dollar}
+        AND status = 1;
+    </update>
+
+    <update id="updateAccountYuan">
+        UPDATE account_yuan
+        SET yuan = yuan + #{yuan}
+        WHERE user_id = #{userId}
+        AND yuan > -#{yuan}
+        AND status = 1;
+    </update>
+
+    <insert id="insertFreezeAccount" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.accountservera.pojo.FreezeAccount">
+        INSERT INTO freeze_account
+        (transaction_id, user_id, freeze_dollar, freeze_yuan)
+        VALUES
+        (#{transactionId}, #{userId}, #{freezeDollar}, #{freezeYuan});
+    </insert>
+
+    <update id="updateFreezeAccountStatus">
+        UPDATE freeze_account
+        SET status = #{status}
+        WHERE transaction_id = #{transactionId}
+        AND status = 1;
+    </update>
+
+</mapper>

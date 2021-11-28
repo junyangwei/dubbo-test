@@ -5,6 +5,17 @@ spring:
   application:
     # 其他服务调用本服务的时候，就需要用到这个名称（Dubbo 默认使用 spring.application.name）
     name: account-server-a
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/account_a
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath:mybatis/*.xml
 
 dubbo:
   scan:
