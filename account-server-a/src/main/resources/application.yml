@@ -1,0 +1,25 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    # 其他服务调用本服务的时候，就需要用到这个名称（Dubbo 默认使用 spring.application.name）
+    name: account-server-a
+
+dubbo:
+  scan:
+    # Dubbo 扫描的基础包（provider 提供 provider 相关的包，consumer 则提供 consumer 相关的包）
+    # 这个配置很关键，扫描并注册需要暴露的接口实现，消费者才能够正常调用
+    base-packages: com.example.accountservera.service
+  registry:
+    # 注册服务地址（这里使用 zookeeper）
+    address: zookeeper://127.0.0.1:2181
+    protocol: zookeeper
+  protocol:
+    # 其他服务调用时使用的名称和端口
+    name: dubbo
+    port: 20880
+  provider:
+    # 设置提供者版本号
+    version: 1.0.0
+
